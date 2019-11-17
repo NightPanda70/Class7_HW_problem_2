@@ -77,35 +77,37 @@ public:
     }
 
     std::vector<T> traversePostOrder() override {
-	//Homework also teken from geekforgeeks
+	//Homework also credit geekforgeeks
+	//I changed it more on visual studio but I got a bug so kept this one
 		std::vector<T> result;
-
+		//check of mroot is not empty
 		if (root == nullptr) {
 			return result;
 		}//end if 
 		// make two stacks 
 		LinkedStack<TreeNode<T>*> s1, s2;
 
-		//  
+		// push the current value of root
+	    	//should be the root of tree
 		s1.push(root);
 		TreeNode<T>* node;
 
 		// make sure that it not empty 
 		while (!s1.isEmpty()) {
-			// Pop an item from s1 and push it to s2 
+			// get value from stack1 and put it to two
 			node = s1.peek();
 			s1.pop();
 			s2.push(node);
 
-			// Push left and right children 
-			// of removed item to s1 
+			// check node has value L || R 
+			// put them in stack1 
 			if (node->left)
 				s1.push(node->left);
 			if (node->right)
 				s1.push(node->right);
 		}
 
-
+		//get values in stack2 and out them in result
 		while (!s2.isEmpty()) {
 			node = s2.peek();
 			s2.pop();
@@ -116,32 +118,32 @@ public:
 
     virtual ~BinaryTree() {
         // homework
-	node_delete(root);
+	node_delete(root);//call helper method
     }
 	
     TreeNode<T>* LowestCommonAncestor(TreeNode<T>* node, T value1, T value2) {
 		if (node == nullptr) {
 			return nullptr;
-		}
-		// check root
+		}//end if
+		// check base case if root is already LCA
 		if (node->val == value1 || node->val == value2) {
 			return node;
-		}
-		// check both childrens
+		}//end if
+		// check the possable paths
 		TreeNode<T>* left = LowestCommonAncestor(node->left, value1, value2);
 		TreeNode<T>* right = LowestCommonAncestor(node->right, value1, value2);		if (left != nullptr && right != nullptr) {
 			return node;
-		}
+		}//end if
 		if (left == nullptr && right == nullptr) {
 			return nullptr;
-		}
+		}//end if
 		return left == nullptr ? right : left;
     }
 
     T LCA(T node1, T node2) {
         // homework
 	TreeNode<T>* node = LowestCommonAncestor(root, node1, node2);
-	return node == nullptr ? -1 : node->val;
+	return node == nullptr ? -1 : node->val;//return node value if found
     }
 
     bool add(const T &) override {
