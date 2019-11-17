@@ -16,17 +16,18 @@ private:
         }
         return 1 + std::max(height(root->left), height(root->right));
     }
-	void node_delete(TreeNode<T>* root) {
-		if (root != nullptr) {
-
-			if ((root->left == nullptr) && (root->right == nullptr)) {
-				delete root;
-				root = nullptr;
-			}//end if
-			node_delete(root->left);
-			node_delete(root->right);
-		} //end if
-	return;	
+	//helper to destructor
+	void node_delete(TreeNode<T>* node) {
+		if (node) {//check if it is a node
+		//go to left side of tree
+		if (node->getLeft() != nullptr) {
+			node_delete(node->getLeft());
+		}//end if
+		if (node->getRight() != nullptr) {//move write
+			node_delete(node->getRight());
+		}//end if
+	     delete node;//delete node at the end
+	    } //end if	
 	}//end 
 	
 public:
@@ -115,7 +116,7 @@ public:
 
     virtual ~BinaryTree() {
         // homework
-	//node_delete(root);
+	node_delete(root);
     }
 	
     TreeNode<T>* LowestCommonAncestor(TreeNode<T>* node, T value1, T value2) {
