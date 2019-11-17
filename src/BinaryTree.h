@@ -47,7 +47,7 @@ public:
 
     std::vector<T> traverseInOrder() override {
 	//homework, to be done iteratively
-			//left root right is in order
+		//left root right is in order
 		LinkedStack<TreeNode<T>*> stack; //make a new stack
 		std::vector<T> result;//make a vector
 		TreeNode<T>* current = root;//pointer to the root
@@ -60,11 +60,9 @@ public:
 				current = current->left;//move to the left
 			}//end inner while
 
-			// the most left node
-			// this could also be the node in the middle
-			current = stack.peek();//check the top
+			current = stack.peek();//go to the last  node oon stack
 			stack.pop();//take the top
-			result.push_back(current->val);//push the current
+			result.push_back(current->val);//push stack val to result
 			
 			// move to the right side
 			current = current->right;//move right
@@ -80,7 +78,7 @@ public:
 	//Homework also credit geekforgeeks
 	//I changed it more on visual studio but I got a bug so kept this one
 		std::vector<T> result;
-		//check of mroot is not empty
+		//check of root is not empty
 		if (root == nullptr) {
 			return result;
 		}//end if 
