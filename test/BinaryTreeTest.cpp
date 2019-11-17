@@ -26,9 +26,9 @@ TEST(tree, traverseInOrder) {
 
 	root->getRight()->setLeft(new TreeNode<int>(5));
 
-	//BinaryTree<int>* tree = new BinaryTree<int>(root);
-	BinaryTree<int> tree(root);
-	std::vector<int> answer{ 2, 1, 7, 3, 5, 5 };
+	//test if it sorted the tree right
+	BinaryTree<int> tree(root);//make tree
+	std::vector<int> answer{ 2, 1, 7, 3, 5, 5 };//correct answer
 	std::vector<int> makeOrder;
 	makeOrder = tree.traverseInOrder();
 	ASSERT_EQ(makeOrder, answer);
@@ -51,7 +51,7 @@ TEST(tree, traversePostOrder) {
 	std::vector<int> answer{ 2,7,1,5,5,3 };
 	std::vector<int> order;
 	order = t2.traversePostOrder();
-	ASSERT_EQ(order, answer);
+	ASSERT_EQ(order, answer);//should be equal
 }//end TEST
 
 TEST(tree, LCA) {
@@ -64,7 +64,7 @@ TEST(tree, LCA) {
 
 	root->getRight()->setLeft(new TreeNode<int>(2));
 	root->getRight()->setRight(new TreeNode<int>(9));
-	BinaryTree<int> tree(root);
+	BinaryTree<int> tree(root);//make tree
 
 	//test the return value
 	ASSERT_EQ(tree.LCA(4, 4), 4);
